@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+table {
+font-size: 1.5em;
+text-align: center;
+}
+th, td {
+padding : 10px;
+}
+
+
+</style>
+</head>
+<body>
+<select id="languageSelect" onchange="changeLang()">
+<option id="select">選択してください</option>
+<option id="select_jpn">日本語</option>
+<option id="select_en">英語</option>
+<option id="select_all">全て表示</option>
+</select>
+<table id="languageTable">
+<tr class="japanese">
+<th>日本</th>
+<td>こんにちは</td>
+<td>ありがとう</td>
+<td>さようなら</td>
+</tr>
+<tr class="english">
+<th>English</th>
+<td>Hello</td>
+<td>Thank you</td>
+<td>Good Bye</td>
+</tr>
+</table>
+
+<script>
+function changeLang() {
+let selectElement = document.getElementById("languageSelect");
+let table = document.getElementById("languageTable");
+let japaneseRows = table.getElementsByClassName("japanese");
+let englishRows = table.getElementsByClassName("english");
+
+
+for (let i = 0; i < japaneseRows.length; i++) {
+japaneseRows[i].style.display = "none";
+}
+for (let i = 0; i < englishRows.length; i++) {
+englishRows[i].style.display = "none";
+}
+
+// 選択された値を取得する
+let selectedId = selectElement.options[selectElement.selectedIndex].id;
+
+// 選択された値が日本語の場合
+if(selectedId === "select_jpn") {
+for (let i = 0; i < japaneseRows.length; i++) {
+
+japaneseRows[i].style.display = "table-row";
+
+}
+// 選択された値が英語の場合
+} else if(selectedId === "select_en"){
+for (let i = 0; i < englishRows.length; i++) {
+
+englishRows[i].style.display = "table-row";
+
+}
+// 選択された値が全ての場合
+} else if(selectedId === "select_all"){
+
+for (let i = 0; i < japaneseRows.length; i++) {
+
+japaneseRows[i].style.display = "table-row";
+
+}
+for (let i = 0; i < englishRows.length; i++) {
+
+englishRows[i].style.display = "table-row";
+
+}
+}
+}
+</script>
+</body>
+</html>
+
+
