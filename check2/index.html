@@ -10,18 +10,16 @@ font-size: 1.5em;
 text-align: center;
 }
 th, td {
-padding : 10px;
+ padding : 10px;
 }
-
-
 </style>
 </head>
 <body>
 <select id="languageSelect" onchange="changeLang()">
-<option id="select">選択してください</option>
-<option id="select_jpn">日本語</option>
-<option id="select_en">英語</option>
-<option id="select_all">全て表示</option>
+<option value="select">選択してください</option>
+<option value="select_jpn">日本語</option>
+<option value="select_en">英語</option>
+<option value="select_all">全て表示</option>
 </select>
 <table id="languageTable">
 <tr class="japanese">
@@ -39,54 +37,48 @@ padding : 10px;
 </table>
 
 <script>
-function changeLang() {
+ function changeLang() {
 let selectElement = document.getElementById("languageSelect");
 let table = document.getElementById("languageTable");
 let japaneseRows = table.getElementsByClassName("japanese");
 let englishRows = table.getElementsByClassName("english");
+ let selectedValue = selectElement.value;
 
-
+         
 for (let i = 0; i < japaneseRows.length; i++) {
 japaneseRows[i].style.display = "none";
-}
+ }
 for (let i = 0; i < englishRows.length; i++) {
 englishRows[i].style.display = "none";
 }
+        
 
-// 選択された値を取得する
-let selectedId = selectElement.options[selectElement.selectedIndex].id;
+if (selectedValue === "select_jpn") {
+                // 日本語のみ表示
+Array.from(japaneseRows).forEach(row => {
+row.style.display = "table-row";
+});
 
-// 選択された値が日本語の場合
-if(selectedId === "select_jpn") {
-for (let i = 0; i < japaneseRows.length; i++) {
+} else if (selectedValue === "select_en") {
+                // 英語のみ表示
+Array.from(englishRows).forEach(row => {
+row.style.display = "table-row";
+});
 
-japaneseRows[i].style.display = "table-row";
+} else if (selectedValue === "select_all") {
+                // 日本語と英語を表示
+Array.from(japaneseRows).forEach(row => {
+row.style.display = "table-row";
+});
 
-}
-// 選択された値が英語の場合
-} else if(selectedId === "select_en"){
-for (let i = 0; i < englishRows.length; i++) {
-
-englishRows[i].style.display = "table-row";
-
-}
-// 選択された値が全ての場合
-} else if(selectedId === "select_all"){
-
-for (let i = 0; i < japaneseRows.length; i++) {
-
-japaneseRows[i].style.display = "table-row";
-
-}
-for (let i = 0; i < englishRows.length; i++) {
-
-englishRows[i].style.display = "table-row";
-
+Array.from(englishRows).forEach(row => {
+row.style.display = "table-row";
+});
 }
 }
-}
-</script>
+    </script>
 </body>
 </html>
+
 
 
